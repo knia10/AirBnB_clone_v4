@@ -27,23 +27,16 @@ $.ajax({
   data: JSON.stringify({}),
   ContentType: application/json,
   success: data => {
-    for (const place of data) {
-      const template = `<article>
-
-      <div class="title_box">
-
-        <h2>${ place.name }</h2>
-
-        <div class="price_by_night">${ place.price_by_night }</div>
-      </div>
-
-      <div class="information">
-          <div class="max_guest">${ place.max_guest } Guest</div>
-          <div class="number_rooms">${ place.number_rooms } Bedroom </div>
-          <div class="number_bathrooms">${ place.number_rooms } bathrooms </div>
-          <div class="number_bathrooms">${place.number_bathrooms } Bathroom </div>;
-    </article>`;
-    $('section.places').append(template)
-    });
+    data.forEach(place => {
+      $('sectio.places').append('<article>' +
+        '<div class="title_box">'+ place.name + '<h2>' +
+        '<div class="price_by_night">$'+ place.price_by_night +
+        '</div></div><div class="information">' +
+        '<div class="max_guest">' + place.max_guest + '</div>' +
+        '<div class="number_rooms">' + place.number_rooms + '</div>' +
+        '<div class="number_bathrooms">' + place.number_rooms + '</div>' + 
+        '<div class="description">' + place.description | safe + '</div></article>');
+      });
+    }
   });
-
+});
